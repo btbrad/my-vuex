@@ -3,6 +3,20 @@ let Vue = null
 class Store {
   constructor (options) {
     this.$options = options
+
+    this._vm = new Vue({
+      data: {
+        $$state: options.state // 两个$数据不会被this劫持代理
+      }
+    })
+  }
+
+  get () {
+    return this._vm.data.$$state
+  }
+
+  set (val) {
+    console.error('Change State directly is not Allowed!')
   }
 }
 

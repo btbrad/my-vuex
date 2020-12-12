@@ -15,7 +15,13 @@ export default {
     msg: String
   },
   created () {
-    console.log('vuex实例', this.$store)
+    console.log('vuex实例', this.$store, this)
+  },
+  data: function () {
+    return {
+      a: 'aaa',
+      $$b: 'bbb'
+    }
   }
 }
 </script>
