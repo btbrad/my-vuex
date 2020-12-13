@@ -3,6 +3,8 @@ let Vue = null
 class Store {
   constructor (options) {
     this.$options = options
+    this._mutations = options.mutations
+    this._actions = options.actions
 
     this._vm = new Vue({
       data: {
@@ -11,12 +13,16 @@ class Store {
     })
   }
 
-  get () {
-    return this._vm.data.$$state
+  get state () {
+    return this._vm._data.$$state
   }
 
-  set (val) {
+  set state (val) {
     console.error('Change State directly is not Allowed!')
+  }
+
+  commit (type, payload) {
+    this._mutations[type](payload)
   }
 }
 
